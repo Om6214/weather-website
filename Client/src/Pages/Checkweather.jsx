@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Cookies from "js-cookie"; // Import js-cookie
+import Cookies from "js-cookie";
 
 const Checkweather = () => {
-  const [city, setCity] = useState(""); // State to store the city entered by the user
-  const [weatherData, setWeatherData] = useState(null); // State to store fetched weather data
+  const [city, setCity] = useState(""); 
+  const [weatherData, setWeatherData] = useState(null); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -14,7 +14,7 @@ const Checkweather = () => {
     setLoading(true);
     setError("");
     try {
-      const token = Cookies.get("authToken"); // Get the token from the cookie
+      const token = Cookies.get("authToken"); 
 
       if (!token) {
         setError("User is not authenticated.");
@@ -26,7 +26,7 @@ const Checkweather = () => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`, // Add token to Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
@@ -34,7 +34,6 @@ const Checkweather = () => {
       const data = await response.json();
       console.log(data);
 
-      // Check if the response is successful and contains weather data
       if (data && data.success === false) {
         setError("City not found");
         setWeatherData(null);
@@ -45,7 +44,7 @@ const Checkweather = () => {
           humidity: data.humidity,
           rain: data.rain_percent,
           description: data.description,
-          iconUrl: data.weatherIcon[0], // Assuming the API returns the icon URL
+          iconUrl: data.weatherIcon[0], 
         });
       }
     } catch (err) {
@@ -59,7 +58,6 @@ const Checkweather = () => {
   return (
     <div className="flex justify-center mt-8">
       <div className="card bg-blue-200 p-6 w-full sm:w-96 shadow-xl rounded-lg">
-        {/* Search Bar */}
         <div className="mb-6">
           <input
             type="text"

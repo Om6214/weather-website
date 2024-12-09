@@ -9,7 +9,7 @@ const History = () => {
   useEffect(() => {
     const fetchSearchHistory = async () => {
       try {
-        const token = Cookies.get("authToken"); // Replace 'authToken' with your cookie's key name
+        const token = Cookies.get("authToken"); 
 
         if (!token) {
           console.error("No token found in cookies");
@@ -26,11 +26,9 @@ const History = () => {
           }
         );
 
-        console.log(response.data); // Log the response for debugging
 
-        // Extract and transform relevant data from the API response
         const formattedData = response.data.map((entry) => ({
-          User: entry.username || "N/A", // Fallback to "N/A" if username is missing
+          User: entry.username || "N/A", 
           City: entry.city || "Unknown",
           Temperature: entry.weather_data?.current?.temperature || "N/A",
           Humidity: entry.weather_data?.current?.humidity || "N/A",

@@ -7,35 +7,32 @@ const Signin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
 
   // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when starting the API call
+    setLoading(true); 
 
     try {
-      // Sending POST request with email and password in the request body
       const response = await axios.post(`http://localhost:5000/api/auth/login`, {
         email,
         password,
       });
 
       if (response.status === 200 && response.data.token) {
-        // Store the token in the cookie with a 1-hour expiration
         Cookies.set("authToken", response.data.token, { expires: 1 });
         Cookies.set("Id", response.data.user.id, { expires: 1 });
         Cookies.set("isAdmin", response.data.user.isAdmin, { expires: 1 });
 
-        // Handle successful login (e.g., redirect or show success message)
         console.log("Login successful");
-        navigate("/"); // Redirect to home page after successful login
+        navigate("/");
       }
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Invalid credentials. Please try again.");
     } finally {
-      setLoading(false); // Set loading to false once the API call completes
+      setLoading(false); 
     }
   };
 

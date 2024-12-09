@@ -1,7 +1,7 @@
 import axios from 'axios';
-import db from '../config/conn.js';  // Use the exported db connection
+import db from '../config/conn.js';  
 
-const WEATHERSTACK_API_KEY = process.env.WEATHERSTACK_API_KEY;  // Replace with your WeatherStack API key
+const WEATHERSTACK_API_KEY = process.env.WEATHERSTACK_API_KEY;  
 
 // Fetch current weather data for a city
 export async function getWeather(req, res) {
@@ -21,7 +21,7 @@ export async function getWeather(req, res) {
         });
 
         // Save the weather search history in the database
-        const userId = req.user.id; // Assuming user is attached to the request by auth middleware
+        const userId = req.user.id; 
         const username = req.user.username
         const weatherData = response.data;
         await db.promise().query("INSERT INTO weather_searches (user_id ,username, city, weather_data) VALUES (?,?, ?, ?)", [
@@ -46,11 +46,8 @@ export async function getWeather(req, res) {
 }
 
 
-
-// Fetch a report of all weather searches (admin or authenticated)
 export async function getWeatherReport(req, res) {
     try {
-        // Assuming you want the report for all users (could be limited to admin only)
         const [searches] = await db.promise().query("SELECT * FROM weather_searches");
         res.json(searches);
     } catch (error) {

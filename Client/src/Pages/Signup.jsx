@@ -26,7 +26,7 @@ const Signup = () => {
       });
 
       if (response.ok) {
-        setIsOtpVisible(true); // Show OTP input after Continue button is clicked
+        setIsOtpVisible(true); 
         console.log('OTP sent to email');
       } else {
         throw new Error('Failed to send OTP');
@@ -35,14 +35,13 @@ const Signup = () => {
       console.error('Error sending OTP:', error);
       alert('Failed to send OTP. Please try again.');
     } finally {
-      setLoading(false); // Set loading to false once the API call completes
+      setLoading(false); 
     }
   };
 
-  // Handle OTP verification and form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when the API call starts
+    setLoading(true); 
 
     const data = {
       name,
@@ -71,7 +70,7 @@ const Signup = () => {
       console.error('Error verifying OTP:', error);
       alert('Invalid OTP or server error. Please try again.');
     } finally {
-      setLoading(false); // Set loading to false once the API call completes
+      setLoading(false);
     }
   };
 
@@ -144,7 +143,6 @@ const Signup = () => {
               </div>
             )}
 
-            {/* OTP Input (appears after Continue is clicked) */}
             {isOtpVisible && (
               <>
                 <div className="form-control">
@@ -157,7 +155,7 @@ const Signup = () => {
                     className="input input-bordered"
                     required
                     value={otp}
-                    onChange={(e) => setOtp(e.target.value)} // Keep OTP as string and convert later
+                    onChange={(e) => setOtp(e.target.value)} 
                   />
                 </div>
 

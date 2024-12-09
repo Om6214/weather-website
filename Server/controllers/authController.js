@@ -21,7 +21,7 @@ export async function signup(req, res) {
     const otp = crypto.randomInt(100000, 999999); // Generate a 6-digit OTP
     otpStorage[email] = {
       otp,
-      expiresAt: Date.now() + 5 * 60 * 1000, // OTP expires in 5 minutes
+      expiresAt: Date.now() + 5 * 60 * 1000, 
     };
 
     const mailOptions = {
@@ -61,7 +61,7 @@ export const verifyOtp = async (req, res) => {
     return res.status(400).json({ message: "OTP expired" });
   }
 
-  console.log(`Stored OTP: ${storedOtp}, Provided OTP: ${otp}`); // Log OTP comparison for debugging
+  console.log(`Stored OTP: ${storedOtp}, Provided OTP: ${otp}`); //for dubugging
 
   // Check if provided OTP matches the stored OTP
   if (otp !== storedOtp) {
@@ -119,8 +119,6 @@ export const verifyOtp = async (req, res) => {
       insertTable();
     }
   });
-
-  // Clear OTP after successful verification
   delete otpStorage[email];
 };
 
