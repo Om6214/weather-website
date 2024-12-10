@@ -65,7 +65,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           {isAdmin === "1" ? (
             <>
-              <li>
+              <li className="mr-2">
                 <Link to="/weather">Check weather</Link>
               </li>
               <li>

@@ -7,6 +7,9 @@ const router = Router();
 router.post("/signup", signup);
 router.post("/verifyotp",verifyOtp)
 router.post("/login", login);
+router.get("/",(req,res)=>{
+    res.send(hello)
+})
 router.get("/user",authMiddleware,getuser)
 
 export default router;
